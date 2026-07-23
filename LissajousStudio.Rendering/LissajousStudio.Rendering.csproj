@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup><TargetFramework>net8.0-windows</TargetFramework><UseWPF>true</UseWPF><EnableWindowsTargeting>true</EnableWindowsTargeting></PropertyGroup>
+  <ItemGroup><ProjectReference Include="..\LissajousStudio.Core\LissajousStudio.Core.csproj" /><PackageReference Include="SkiaSharp" Version="3.116.1" /><PackageReference Include="SkiaSharp.Views.WPF" Version="3.116.1" /></ItemGroup>
+</Project>
