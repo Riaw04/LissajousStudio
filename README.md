@@ -36,42 +36,6 @@ dotnet run --project LissajousStudio.App
 
 On startup the app synthesizes a stereo signal where left is sine and right is sine shifted by 90 degrees, producing a circle on the SkiaSharp oscilloscope. Start/Stop, frequency, amplitude, phase, sample-rate, FPS, and measurements are exposed through MVVM bindings.
 
-## Editing figures in the UI with LaTeX-like expressions
-
-Use the **LaTeX Function Editor** in the bottom control panel to type separate `X(t)` and `Y(t)` expressions, then click **Apply LaTeX Figure**. Supported tokens are `t`, `A`, `f`, `pi`, `sin()`, `cos()`, `tan()`, `sqrt()`, `abs()`, `+`, `-`, `*`, `/`, and `^`. Use explicit multiplication, for example `A*\sin(2\pi t)` rather than `A\sin(2\pi t)`.
-
-Example UI expressions:
-
-```text
-X(t) = A*\sin(3*2\pi t)
-Y(t) = A*\sin(2*2\pi t + \pi/2)
-```
-
-When applied, the UI switches `SignalParameters.FigureId` to `latex`, so the same evaluated stereo buffer continues to feed audio output, rendering, and future exporters.
-
-## Adding your own Lissajous figures
-
-Add a C# class that implements `ILissajousFigure`, return one normalized `LissajousPoint` from `Evaluate`, and register it in `LissajousStudio.App/App.xaml.cs` as another `ILissajousFigure` service. Set `SignalParameters.FigureId` to your figure `Id` from presets or UI selection.
-
-Example:
-
-```csharp
-public sealed class MyButterflyFigure : ILissajousFigure
-{
-    public string Id => "my-butterfly";
-    public string DisplayName => "My Butterfly";
-
-    public LissajousPoint Evaluate(in FigureParameters p)
-    {
-        var x = Math.Sin(Math.Tau * p.Phase * 5.0) * p.Amplitude;
-        var y = Math.Sin(Math.Tau * p.Phase * 4.0 + Math.Cos(Math.Tau * p.Phase)) * p.Amplitude;
-        return new LissajousPoint((float)x, (float)y);
-    }
-}
-```
-
-For quick experiments, instantiate `DelegateLissajousFigure` with a lambda. Keep output values in `-1..1`; the generator clamps samples before publishing them to the shared stereo buffer.
-
 ## Developer notes
 
 - Never generate graphics independently from audio. Rendering consumes `StereoSampleBuffer` snapshots only.
