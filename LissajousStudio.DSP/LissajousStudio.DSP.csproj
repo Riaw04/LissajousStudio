@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup><ProjectReference Include="..\LissajousStudio.Core\LissajousStudio.Core.csproj" /><PackageReference Include="MathNet.Numerics" Version="6.0.0" /></ItemGroup>
+</Project>
