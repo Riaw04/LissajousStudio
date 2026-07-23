@@ -1,5 +1,5 @@
 using System.Windows;
-using System.Windows.Input;
+using System.Windows.Media;
 using LissajousStudio.Core.Models;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
