@@ -24,17 +24,17 @@ public sealed class LissajousSignalGenerator : ISignalGenerator
 
     public void GenerateBuffer(Span<float> interleavedStereo, SignalParameters parameters)
     {
-        var sampleRate = Math.Max(1, parameters.SampleRate);
+        var sampleRate = System.Math.Max(1, parameters.SampleRate);
         var increment = parameters.FrequencyHz / sampleRate;
-        var amplitude = Math.Clamp(parameters.Amplitude, 0.0, 1.0);
+        var amplitude = System.Math.Clamp(parameters.Amplitude, 0.0, 1.0);
         var phaseOffset = parameters.PhaseDegrees / 360.0;
         var figure = ResolveFigure(parameters.FigureId);
 
         for (var frame = 0; frame < interleavedStereo.Length / 2; frame++)
         {
             var point = figure.Evaluate(new FigureParameters(_phase, parameters.FrequencyHz, amplitude, phaseOffset, sampleRate, frame));
-            interleavedStereo[frame * 2] = Math.Clamp(point.X, -1f, 1f);
-            interleavedStereo[frame * 2 + 1] = Math.Clamp(point.Y, -1f, 1f);
+            interleavedStereo[frame * 2] = System.Math.Clamp(point.X, -1f, 1f);
+            interleavedStereo[frame * 2 + 1] = System.Math.Clamp(point.Y, -1f, 1f);
             _phase = (_phase + increment) % 1.0;
         }
     }
