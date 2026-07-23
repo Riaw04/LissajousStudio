@@ -14,8 +14,8 @@ public sealed class LatexExpressionFigure : IEditableLatexFigure
     public LatexExpressionFigure(LatexExpressionCompiler compiler)
     {
         _compiler = compiler;
-        XExpression = @"A*\sin(2\pi t)";
-        YExpression = @"A*\sin(2\pi t + \pi/2)";
+        XExpression = @"A\sin(2\pi t)";
+        YExpression = @"A\sin(2\pi t + \pi/2)";
         _x = compiler.Compile(XExpression);
         _y = compiler.Compile(YExpression);
     }

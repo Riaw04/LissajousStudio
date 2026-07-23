@@ -3,6 +3,8 @@ using LissajousStudio.App.ViewModels;
 using LissajousStudio.Audio.Services;
 using LissajousStudio.Core.Interfaces;
 using LissajousStudio.Core.Models;
+using LissajousStudio.DSP.Figures;
+using LissajousStudio.DSP.Math;
 using LissajousStudio.DSP.SignalGenerators;
 using LissajousStudio.Shared.Logging;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +21,12 @@ public partial class App : Application
         _host = Host.CreateDefaultBuilder().ConfigureServices(s => s
             .AddSingleton<SignalParameters>()
             .AddSingleton<StereoSampleBuffer>()
+            .AddSingleton<LatexExpressionCompiler>()
+            .AddSingleton<ILissajousFigure, CircleFigure>()
+            .AddSingleton<ILissajousFigure, ClassicLissajousFigure>()
+            .AddSingleton<LatexExpressionFigure>()
+            .AddSingleton<IEditableLatexFigure>(sp => sp.GetRequiredService<LatexExpressionFigure>())
+            .AddSingleton<ILissajousFigure>(sp => sp.GetRequiredService<LatexExpressionFigure>())
             .AddSingleton<ISignalGenerator, LissajousSignalGenerator>()
             .AddSingleton<IAudioEngine, AudioEngine>()
             .AddSingleton<MainViewModel>()).Build();
