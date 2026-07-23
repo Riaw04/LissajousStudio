@@ -11,8 +11,8 @@ public sealed class ClassicLissajousFigure : ILissajousFigure
 
     public LissajousPoint Evaluate(in FigureParameters parameters)
     {
-        var x = Math.Sin(Math.Tau * parameters.Phase * 3.0) * parameters.Amplitude;
-        var y = Math.Sin(Math.Tau * (parameters.Phase * 2.0 + parameters.PhaseOffsetTurns)) * parameters.Amplitude;
+        var x = System.Math.Sin(System.Math.Tau * parameters.Phase * 3.0) * parameters.Amplitude;
+        var y = System.Math.Sin(System.Math.Tau * (parameters.Phase * 2.0 + parameters.PhaseOffsetTurns)) * parameters.Amplitude;
         return new LissajousPoint((float)x, (float)y);
     }
 }

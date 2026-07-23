@@ -11,8 +11,8 @@ public sealed class CircleFigure : ILissajousFigure
 
     public LissajousPoint Evaluate(in FigureParameters parameters)
     {
-        var x = Math.Sin(Math.Tau * parameters.Phase) * parameters.Amplitude;
-        var y = Math.Sin(Math.Tau * (parameters.Phase + parameters.PhaseOffsetTurns)) * parameters.Amplitude;
+        var x = System.Math.Sin(System.Math.Tau * parameters.Phase) * parameters.Amplitude;
+        var y = System.Math.Sin(System.Math.Tau * (parameters.Phase + parameters.PhaseOffsetTurns)) * parameters.Amplitude;
         return new LissajousPoint((float)x, (float)y);
     }
 }

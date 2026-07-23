@@ -58,9 +58,9 @@ public sealed class LatexExpressionCompiler
             var numerator = ReadBracedExpression(expression, numeratorStart, out var afterNumerator);
             var denominator = ReadBracedExpression(expression, afterNumerator, out var afterDenominator);
             expression = string.Concat(
-                expression.AsSpan(0, markerIndex),
+                expression[..markerIndex],
                 "((", numerator, ")/(", denominator, "))",
-                expression.AsSpan(afterDenominator));
+                expression[afterDenominator..]);
         }
 
         return expression;
